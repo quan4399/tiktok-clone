@@ -1,0 +1,31 @@
+.wrapper {
+  font-size: 1.6rem;
+  font-weight: 700;
+  min-width: 100px;
+  padding: 9px 16px;
+  border-radius: 4px;
+
+  + .wrapper {
+    margin-left: 8px;
+  }
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.primary {
+  cursor: pointer;
+  color: var(--white);
+  background-color: var(--primary);
+.text {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+  &:hover {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), #fe2c55;
+  }
+}
