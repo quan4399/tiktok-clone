@@ -2,59 +2,100 @@ import classNames from "classnames/bind";
 import styles from './Header.module.scss';
 import images from '~/assets/images';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircleXmark, faEllipsisVertical, faMagnifyingGlass, faSpinner} from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleQuestion, faCloudUpload, faCoins,
+  faEllipsisVertical, faGear, faKeyboard,
+  faLanguage, faSignOut, faUser
+} from "@fortawesome/free-solid-svg-icons";
 import Button from '~/components/Button'
-import Tippy from '@tippyjs/react/headless';
-import {useEffect, useState} from "react";
-import { Wrapper as PopperWrapper } from "~/components/Popper";
+import Tippy from '@tippyjs/react';
+import Menu from "~/components/Popper/Menu";
+import 'tippy.js/dist/tippy.css'
+import Image from "~/components/Image";
+import Search from "~/components/Layout/components/Search";
 
 const cx = classNames.bind(styles)
+const MENU_ITEMS = [
+  {
+    icon: <FontAwesomeIcon icon={faLanguage}/>,
+    title: 'English',
+  },
+  {
+    icon: <FontAwesomeIcon icon={faCircleQuestion}/>,
+    title: 'Feedback and help',
+    to: '/feedback',
+  },
+  {
+    icon: <FontAwesomeIcon icon={faKeyboard}/>,
+    title: 'Keyboard and shortcut',
+  }
+]
 
 function Header() {
-  const [searchResult, setSearchResult] = useState([])
 
-  useEffect(() => {
-    setTimeout(() => {
-      setSearchResult([1, 2, 3])
-    }, 3000)
-  }, [])
+  const currentUser = true
+
+  //add item to menu item
+  const userMenu = [
+    {
+      icon: <FontAwesomeIcon icon={faUser} />,
+      title: 'View profile',
+      to: '/@hoaa',
+    },
+    {
+      icon: <FontAwesomeIcon icon={faCoins} />,
+      title: 'Get coin',
+      to: '/coin',
+    },
+    {
+      icon: <FontAwesomeIcon icon={faGear} />,
+      title: 'Setting',
+      to: '/settings',
+    },
+    ...MENU_ITEMS,
+    {
+      icon: <FontAwesomeIcon icon={faSignOut} />,
+      title: 'Log out',
+      to: '/logout',
+    },
+  ]
 
   return (
     <header className={cx('wrapper')}>
       <div className={cx('inner')}>
-        <div className={cx('logo')}>
-          <img src={images.logo} alt="Tiktok"/>
-        </div>
-        <Tippy
-          interactive
-          visible={searchResult.length > 0}
-          render={attrs => (
-            <PopperWrapper>
-              <div className={cx('search-result')} tabIndex='-1'{...attrs}>
-                ket qua
-              </div>
-            </PopperWrapper>
+        <img src={images.logo} alt="Tiktok"/>
+
+        <Search />
+
+        <div className={cx('actions')}>
+          {currentUser ? (
+            <>
+              <Tippy trigger='click' content='Upload video' placement='bottom'>
+                <button className={cx('action-btn')}>
+                  <FontAwesomeIcon icon={faCloudUpload}/>
+                </button>
+              </Tippy>
+            </>
+          ) : (
+
+            <>
+              <Button text>Upload</Button>
+              <Button primary onClick={() => alert('login')}>Log in</Button>
+            </>
           )}
-        >
-          <div className={cx('search')}>
-            <input placeholder='search account and video' spellCheck={false}/>
-            <button className={cx('clear')}>
-              <FontAwesomeIcon icon={faCircleXmark}/>
-            </button>
-            <FontAwesomeIcon className={cx('loading')} icon={faSpinner}/>
-            <button className={cx('search-btn')}>
-              <FontAwesomeIcon icon={faMagnifyingGlass}/>
-            </button>
-          </div>
-        </Tippy>
-        <div className={cx('action')}>
-          <Button text>Upload</Button>
-          <Button primary onClick={() => alert('Clicked')}>
-            Log in
-          </Button>
-          <Button className={cx('more-btn')}>
-            <FontAwesomeIcon icon={faEllipsisVertical}/>
-          </Button>
+
+          <Menu items={currentUser ? userMenu : MENU_ITEMS}>
+            {currentUser ? (
+              <Image className={cx('user-avatar')}
+                   src="https://ncrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiIBCGW_Kh4itNM5MTgT_110NcxnyoSnkS4g&usqp=CAU"
+                   alt="current user"
+              />
+            ) : (
+              <button className={cx('more-btn')}>
+                <FontAwesomeIcon icon={faEllipsisVertical}/>
+              </button>
+            )}
+          </Menu>
         </div>
       </div>
     </header>

@@ -4,6 +4,7 @@
   min-width: 100px;
   padding: 9px 16px;
   border-radius: 4px;
+  background: none;
 
   + .wrapper {
     margin-left: 8px;
@@ -20,6 +21,7 @@
   color: var(--white);
   background-color: var(--primary);
 .text {
+  color: white;
   &:hover {
     text-decoration: underline;
   }
@@ -29,3 +31,4 @@
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), #fe2c55;
   }
 }
+
