@@ -2,16 +2,18 @@ import Home from  "~/pages/Home"
 import Following from "~/pages/Following";
 import Upload from "~/pages/Upload";
 import Search from "~/pages/Search";
-import routesConfig from '~/config/routes'
+import Live from  "~/pages/Live"
+import config from '~/config'
 
-import HeaderOnly from "~/components/Layout/HeaderOnly";
+import HeaderOnly from "~/layouts/HeaderOnly";
 
 
 const publicRoutes = [
-  { path: routesConfig.home, component: Home },
-  { path: routesConfig.following, component: Following },
+  { path: config.routes.home, component: Home },
+  { path: config.routes.following, component: Following },
   { path: '/upload', component: Upload, layout: HeaderOnly },
   { path: '/search', component: Search, layout: null },
+  { path: config.routes.live, component: Live },
   // { path: '/@:nickname', component: Profile }
 ]
 

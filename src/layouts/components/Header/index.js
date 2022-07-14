@@ -12,7 +12,7 @@ import Tippy from '@tippyjs/react';
 import Menu from "~/components/Popper/Menu";
 import 'tippy.js/dist/tippy.css'
 import Image from "~/components/Image";
-import Search from "~/components/Layout/components/Search";
+import Search from "~/layouts/components/Search";
 
 const cx = classNames.bind(styles)
 const MENU_ITEMS = [
