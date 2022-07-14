@@ -56,6 +56,20 @@
   cursor: pointer;
 }
 
+.loading {
+  animation: spinner 0.8s linear infinite;
+}
+@keyframes spinner {
+  from {
+    transform: translateY(-50%) rotate(0);
+    color: (red);
+  }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+    color: blue;
+  }
+}
+
 
 .search-btn {
   width: var(--search-button-width);
